@@ -1,29 +1,37 @@
 #include "shell.h"
 
 /**
-  * _strncmp - compares two strings.
-  * @s1: pointer to the first string
-  * @s2: pointer to the second string.
-  * @n: number of bytes of the string to compare.
-  * Return: < 0 if s1 is shorter than s2,
-  *	0 for match
-  *	> 0 if s1 is longer than s2.
-  */
-
-int _strncmp(const char *s1, const char *s2, int n)
+ * _strcpy - copie a string from source to destination
+ * @source: the string source
+ * @dest: the string destination
+ *
+ * Return: the pointer to dest
+ */
+char *_strcpy(char *dest, char *source)
 {
 	int i;
 
-	for (i = 0; s1[i] && s[2] && i < n; i++)
+	for (i = 0; source[i] != '\0'; i++)
 	{
-		if (s1[i] > s2[i])
-			return (s1[i] - s2[i]);
-		else if (s1[i] < s2[i])
-			return (s1[i] - s2[i]);
+		dest[i] = source[i];
 	}
-	if (i == n)
-		return (0);
-	else
-		return (-8);
+	dest[i] = '\0';
+
+	return (dest);
+}
+/**
+ * _isalpha - check if the input is a letter
+ * @c: the character to be checked
+ *
+ * Return: 1 if letter, 0 otherwise
+ */
+int _isalpha(int c)
+{
+	if ((c >= 65 && c <= 90) || (c >= 97 && c <= 122))
+
+	{
+		return (SUCCESS);
+	}
+	return (FAIL);
 }
 
