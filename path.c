@@ -1,27 +1,17 @@
 #include "shell.h"
 /**
- * find_path - finds the path in the global environment
+ * is_path_form - chekc if the given fikenname is a path
+ * @data: the data strucct pointer
  *
- * Return: NULL if not found or print the path if found
+ * Return: (Success)
+ * ------- (Fail) otherwise
  */
-char find_path(void)
+int is_path_form(sh_t *data)
 {
-	int i;
-	char *env = environ, *path;
-
-	while (*env)
+	if (_strchr(data->args[0], '/') != 0)
 	{
-		if (_strncmp(*env, "PATH =", 5) == 0)
-		{
-			path = *env;
-			while (*path && i < 5)
-			{
-				path++;
-				i++;
-			}
-			return (path);
-		}
-		env++;
+		data->cmd = _strdup(data->args[0]);
+		return (SUCCESS);
 	}
-	return (NULL);
+	return (FAIL);
 }
