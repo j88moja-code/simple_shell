@@ -19,7 +19,7 @@ extern char **environ;
 #define BUFSIZE 256
 #define PARSESIZE 64
 #define PRINT(c) (write(STDOUT_FILENO, c, _strlen(c)))
-#define PPROMPT "$"
+#define PROMPT "$"
 #define SUCCESS (1)
 #define FAIL (-1)
 #define NEUTRAL (0)
