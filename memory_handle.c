@@ -52,3 +52,20 @@ char *_memset(char *s, char byt, unsigned int n)
 	}
 	return (s);
 }
+/**
+ * _memcpy - copies information between void pointers.
+ * @newptr: destination pointer.
+ * @ptr: source pointer.
+ * @size: size of the new pointer.
+ *
+ * Return: none.
+ */
+void _memcpy(void *dest, const void *src, unsigned int n)
+{
+	char *char_ptr = (char *)ptr;
+	char *char_newptr = (char *)newptr;
+	unsigned int i;
+
+	for (i = 0; i < size; i++)
+		char_newptr[i] = char_ptr[i];
+}
