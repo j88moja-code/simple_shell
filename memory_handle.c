@@ -62,10 +62,10 @@ char *_memset(char *s, char byt, unsigned int n)
  */
 void _memcpy(void *dest, const void *src, unsigned int n)
 {
-	char *char_ptr = (char *)ptr;
-	char *char_newptr = (char *)newptr;
-	unsigned int i;
+	char *char_src = (char *)src;
+	char *char_dest = (char *)dest;
+	unsigned int n;
 
-	for (i = 0; i < size; i++)
-		char_newptr[i] = char_ptr[i];
+	for (n = 0; n < size; n++)
+		char_dest[i] = char_src[i];
 }
