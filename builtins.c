@@ -1,7 +1,5 @@
 #include "shell.h"
 
-#include "shell.h"
-
 #define SETOWD(V) (V = _strdup(_getenv("OLDPWD")))
 /**
  * change_dir - changes directory
