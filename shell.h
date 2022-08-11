@@ -100,14 +100,16 @@ int write_history(sh_t *data);
 int _isalpha(int c);
 
 /* -------------Builtins-----------------*/
-int (*get_builtin(char *cmd))(data_shell *datash);
+int abort_hsh(sh_t *data);
+int change_dir(sh_t *data);
+int display_help(sh_t *data);
+int handle_builtin(sh_t *data);
+int check_builtin(sh_t *data);
 
 /* -------------Parse-----------------*/
 int is_path_form(sh_t *data);
 void is_short_form(sh_t *data);
 int is_builtin(sh_t *data);
 
-/* -------------Exit-----------------*/
-void exit_shell(char **args, char *line, char **env);
 
 #endif /* SHELL_H */
