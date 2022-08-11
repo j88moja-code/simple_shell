@@ -80,7 +80,7 @@ char *_strcpy(char *dest, char *source);
 /* ----------Memory prototype------------*/
 void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
 char *_memset(char *s, char byt, unsigned int n);
-char *_memcpy(void *dest, const char *src, unsigned int n);
+char *_memset(char *s, char byt, unsigned int n)
 int free_data(sh_t *);
 
 /* ----------Tools prototype-------------*/
