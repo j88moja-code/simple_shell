@@ -1,15 +1,21 @@
 #include "shell.h"
-
 /**
- * exit_shell - Runs the builtin exit
- * @line: Line buffer of the user's input
- * @arg: Argument
- * 
- * Return: Void
+ * free_data - frees data
+ * @data: the data structure
+ *
+ * Return: (Success) positive number
+ * ------- (Fail) negative number
  */
-void exit_shell(char **arg, char *line)
+int free_data(sh_t *data)
 {
-    free(arg);
-    free(line);
-    exit(0);
+	free(data->line);
+	data->line = NULL;
+	free(data->args);
+	data->args = NULL;
+	free(data->cmd);
+	data->cmd = NULL;
+	free(data->error_msg);
+	data->error_msg = NULL;
+	return (0);
 }
+
