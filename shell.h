@@ -33,7 +33,6 @@ extern char **environ;
  * @error_msg: the global path
  * @cmd: the parsed command
  * @count: the count of args
- * @status: the status of hsh
  * @index: the command index
  * @oldpwd: the old path visited
  * @env: the environnment
@@ -47,9 +46,8 @@ typedef struct sh_data
 	char **args;
 	char *cmd;
 	char *error_msg;
-	size_t count;
 	char *oldpwd;
-	int status;
+	size_t count;
 	unsigned long int index;
 	char **env;
 } sh_t;

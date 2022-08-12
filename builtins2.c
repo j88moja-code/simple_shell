@@ -35,14 +35,12 @@ int new_setenv(sh_t *data __attribute__((unused)))
 	if (data->args[1] == NULL || data->args[2] == NULL)
 	{
 		print_error2(data, "Incorrect number of arguments\n");
-		data->status = 2;
 		return (FAIL);
 	}
 	new_value = malloc(_strlen(data->args[0]) + 1 + _strlen(data->args[1]) + 1);
 	if (new_value == NULL)
 	{
 		print_error2(data, "Incorrect number of args\n");
-		data->status = 2;
 		return (FAIL);
 	}
 	_strcpy(new_value, data->args[0]);
@@ -89,7 +87,6 @@ int new_unsetenv(sh_t *data __attribute__((unused)))
 	if (data->args[0] == NULL)
 	{
 		print_error2(data, ": Incorrect number of arguments\n");
-		data->status = 2;
 		return (FAIL);
 	}
 	env_var = _getenv2(data->args[0]);
@@ -104,7 +101,6 @@ int new_unsetenv(sh_t *data __attribute__((unused)))
 	if (new_environ == NULL)
 	{
 		print_error2(data, NULL);
-		data->status = 127;
 		abort_hsh(data);
 	}
 	for (index = 0, index2 = 0; environ[index]; index++)

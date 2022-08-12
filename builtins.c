@@ -53,42 +53,24 @@ int change_dir(sh_t *data)
  */
 int abort_hsh(sh_t *data __attribute__((unused)))
 {
-	int i, len_of_int = 10;
-	unsigned int num = 0, max = 1 << (sizeof(int) * 8 - 1);
+	int code, i = 0;
 
-	if (data->args[0])
+	if (data->args[1] == NULL)
 	{
-		if (data->args[0][0] == '+')
+		free_data(data);
+		exit(errno);
+	}
+	while (data->args[1][i])
+	{
+		if (_isalpha(data->args[1][i++]) < 0)
 		{
-			i = 1;
-			len_of_int++;
-		}
-		for (; data->args[0][i]; i++)
-		{
-			if (i <= len_of_int && data->args[0][i] >= '0' && data->args[0][i] <= '9')
-			{
-				num = (num * 10) + (data->args[0][i] - '0');
-			}
-			else
-			{
-				data->error_msg = _strdup("Illegal number\n");
-				return (FAIL);
-			}
+			data->error_msg = _strdup("Illegal number\n");
+			return (FAIL);
 		}
 	}
-	else
-	{
-		return (-3);
-	}
-	if (num > max - 1)
-	{
-		data->error_msg = _strdup("Illegal number\n");
-		return (FAIL);
-	}
+	code = _atoi(data->args[1]);
 	free_data(data);
-	free(data->args);
-	free_env();
-	exit(num);
+	exit(code);
 }
 /**
  * display_help - display the help menu
