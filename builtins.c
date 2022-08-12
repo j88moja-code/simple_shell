@@ -53,24 +53,42 @@ int change_dir(sh_t *data)
  */
 int abort_hsh(sh_t *data __attribute__((unused)))
 {
-	int code, i = 0;
+	int i, len_of_int = 10;
+	unsigned int num = 0, max = 1 << (sizeof(int) * 8 - 1);
 
-	if (data->args[1] == NULL)
+	if (data->args[0])
 	{
-		free_data(data);
-		exit(errno);
-	}
-	while (data->args[1][i])
-	{
-		if (_isalpha(data->args[1][i++]) < 0)
+		if (data->args[0][0] == '+')
 		{
-			data->error_msg = _strdup("Illegal number\n");
-			return (FAIL);
+			i = 1;
+			len_of_int++;
+		}
+		for (; data->args[0][i]; i++)
+		{
+			if (i <= len_of_int && data->args[0][i] >= '0' && data->args[0][i] <= '9')
+			{
+				num = (num * 10) + (data->args[0][i] - '0');
+			}
+			else
+			{
+				data->error_msg = _strdup("Illegal number\n");
+				return (FAIL);
+			}
 		}
 	}
-	code = _atoi(data->args[1]);
+	else
+	{
+		return (-3);
+	}
+	if (num > max - 1)
+	{
+		data->error_msg = _strdup("Illegal number\n");
+		return (FAIL);
+	}
 	free_data(data);
-	exit(code);
+	free(data->args);
+	free_env();
+	exit(num);
 }
 /**
  * display_help - display the help menu
@@ -115,8 +133,12 @@ int handle_builtin(sh_t *data)
 	blt_t blt[] = {
 		{"exit", abort_hsh},
 		{"cd", change_dir},
+		{"env", _env},
+		{"setenv", new_setenv},
+		{"unsetenv", new_unsetenv},
 		{"help", display_help},
-		{NULL, NULL}};
+		{NULL, NULL}
+	};
 	int i = 0;
 
 	while ((blt + i)->cmd)

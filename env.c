@@ -25,18 +25,17 @@ char **make_env(char **env)
 }
 
 /**
- * free_env - free the shell's environment
- * @env: shell's environment
+ * free_env - Frees the the environment copy.
  *
- * Return: void
+ * Return: nothing.
  */
-void free_env(char **env)
+void free_env(void)
 {
-	unsigned int i;
+	int index;
 
-	for (i = 0; env[i] != NULL; i++)
-		free(env[i]);
-	free(env);
+	for (index = 0; environ[index]; index++)
+		free(environ[index]);
+	free(environ);
 }
 /**
  * signal_handler - handle the process interrept signal

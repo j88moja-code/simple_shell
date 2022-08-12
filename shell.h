@@ -32,6 +32,8 @@ extern char **environ;
  * @args: the arguments token
  * @error_msg: the global path
  * @cmd: the parsed command
+ * @count: the count of args
+ * @status: the status of hsh
  * @index: the command index
  * @oldpwd: the old path visited
  * @env: the environnment
@@ -45,9 +47,11 @@ typedef struct sh_data
 	char **args;
 	char *cmd;
 	char *error_msg;
+	size_t count;
 	char *oldpwd;
+	int status;
 	unsigned long int index;
-	char *env;
+	char **env;
 } sh_t;
 /**
  * struct builtin - Manage the builtin functions
@@ -90,7 +94,7 @@ int free_data(sh_t *);
 void *fill_an_array(void *a, int el, unsigned int len);
 void signal_handler(int signo);
 char **make_env(char **env);
-void free_env(char **env);
+void free_env(void);
 char **_getenv2(const char *var);
 char *_getenv(char *path_name);
 void index_cmd(sh_t *data);
@@ -102,6 +106,7 @@ char *_itoa(unsigned int n);
 int intlen(int num);
 int _atoi(char *c);
 int print_error(sh_t *data);
+char *_uitoa(unsigned int count);
 int write_history(sh_t *data);
 int _isalpha(int c);
 
