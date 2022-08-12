@@ -1,32 +1,42 @@
 #include "shell.h"
 /**
- * _getenv - gets the path
- * @path_name: a pointer to the struct of data
+ * make_env - make the shell environment from the environment passed to main
+ * @env: environment passed to main
  *
- * Return: (Success) a positive number
- * ------- (Fail) a negative number
+ * Return: pointer to the new environment
  */
-char *_getenv(char *path_name)
+char **make_env(char **env)
 {
-	char **environ_cursor, *env_ptr, *name_ptr;
+	char **newenv = NULL;
+	size_t i;
 
-	environ_cursor = environ;
-	while (*environ_cursor)
+	for (i = 0; env[i] != NULL; i++)
+		;
+	newenv = malloc(sizeof(char *) * (i + 1));
+	if (newenv == NULL)
 	{
-		env_ptr = *environ_cursor;
-		name_ptr = path_name;
-		while (*env_ptr == *name_ptr)
-		{
-			if (*env_ptr == '=')
-				break;
-			env_ptr++;
-			name_ptr++;
-		}
-		if ((*env_ptr == '=') && (*name_ptr == '\0'))
-			return (env_ptr + 1);
-		environ_cursor++;
+		perror("Fatal Error");
+		exit(1);
 	}
-	return (NULL);
+	for (i = 0; env[i] != NULL; i++)
+		newenv[i] = _strdup(env[i]);
+	newenv[i] = NULL;
+	return (newenv);
+}
+
+/**
+ * free_env - free the shell's environment
+ * @env: shell's environment
+ *
+ * Return: void
+ */
+void free_env(char **env)
+{
+	unsigned int i;
+
+	for (i = 0; env[i] != NULL; i++)
+		free(env[i]);
+	free(env);
 }
 /**
  * signal_handler - handle the process interrept signal
@@ -63,33 +73,23 @@ void *fill_an_array(void *a, int el, unsigned int len)
 	}
 	return (a);
 }
-
 /**
- * array_rev - reverse array
- * @arr: the given array
- * @len: the array length
+ * _getenv2 - Gets an environmental variable from the PATH.
+ * @var: The name of the environmental variable to get.
  *
- * Return: void
+ * Return: If the environmental variable does not exist - NULL.
+ *         Otherwise - a pointer to the environmental variable.
  */
-void array_rev(char *arr, int len)
+char **_getenv2(const char *var)
 {
-	int i;
-	char tmp;
+	int index, len;
 
-	for (i = 0; i < (len / 2); i++)
+	len = _strlen(var);
+	for (index = 0; environ[index]; index++)
 	{
-		tmp = arr[i];
-		arr[i] = arr[(len - 1) - i];
-		arr[(len - 1) - i] = tmp;
+		if (_strncmp(var, environ[index], len) == 0)
+			return (&environ[index]);
 	}
-}
-/**
- * index_cmd - indexed command
- * @data: a pointer to the data structure
- *
- * Return: void
- */
-void index_cmd(sh_t *data)
-{
-	data->index += 1;
+
+	return (NULL);
 }
