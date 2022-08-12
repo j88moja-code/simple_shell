@@ -70,12 +70,15 @@ int process_cmd(sh_t *);
 /* ----------String prototype------------*/
 char *_strdup(char *str);
 char *_strcat(char *first, char *second);
+int _strncmp(const char *s1, const char *s2, size_t n);
 int _strlen(char *str);
 char *_strchr(char *str, char c);
 int _strcmp(char *s1, char *s2);
 
 /* ----------More String prototype-------*/
 char *_strcpy(char *dest, char *source);
+void print_error2(sh_t *data, char *msg);
+void _puts2(char *str);
 
 /* ----------Memory prototype------------*/
 void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
@@ -86,6 +89,9 @@ int free_data(sh_t *);
 /* ----------Tools prototype-------------*/
 void *fill_an_array(void *a, int el, unsigned int len);
 void signal_handler(int signo);
+char **make_env(char **env);
+void free_env(char **env);
+char **_getenv2(const char *var);
 char *_getenv(char *path_name);
 void index_cmd(sh_t *data);
 void array_rev(char *arr, int len);
@@ -110,6 +116,10 @@ int check_builtin(sh_t *data);
 int is_path_form(sh_t *data);
 void is_short_form(sh_t *data);
 int is_builtin(sh_t *data);
+int _env(sh_t *data __attribute__((unused)));
+int new_setenv(sh_t *data __attribute__((unused)));
+int new_unsetenv(sh_t *data __attribute__((unused)));
+
 
 
 #endif /* SHELL_H */
