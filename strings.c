@@ -35,7 +35,7 @@ char *_strcat(char *first, char *second)
  * Return: (Success) the length of the string
  * ------- (Fail) negative value
  */
-int _strlen(char *str)
+int _strlen(const char *str)
 {
 	int len;
 

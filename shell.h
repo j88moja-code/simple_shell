@@ -71,7 +71,7 @@ int process_cmd(sh_t *);
 char *_strdup(char *str);
 char *_strcat(char *first, char *second);
 int _strncmp(const char *s1, const char *s2, size_t n);
-int _strlen(char *str);
+int _strlen(const char *str);
 char *_strchr(char *str, char c);
 int _strcmp(char *s1, char *s2);
 
